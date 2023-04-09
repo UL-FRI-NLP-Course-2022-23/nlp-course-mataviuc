@@ -1,4 +1,7 @@
 from allennlp.predictors.predictor import Predictor
+import allennlp_models.tagging
+
+from allennlp.predictors.predictor import Predictor
 import pandas as pd
 
 model_url = "https://storage.googleapis.com/allennlp-public-models/coref-spanbert-large-2020.02.27.tar.gz"
@@ -12,14 +15,14 @@ represented Delaware in the United States Senate from 1973 to 2009."
 
 def coreference(text):
     prediction = predictor.predict(document=text)
-    return predictor.coref_resolved(text)
+    return pd.Series([predictor.coref_resolved(text),prediction['document'],prediction['clusters']])
 
 df = pd.read_csv("./data/grimms_fairytales.csv")
 df = df.iloc[:, 1:]
 df = df.replace(r'[\n]+', ' ', regex=True)
 df = df.replace(r'[\r]+', ' ', regex=True)
 
-df['coreference'] = df.apply(lambda row: coreference(row['Text']), axis=1)
+df[['coreference','tokenized_text','entities']] = df.apply(lambda row: coreference(row['Text']), axis=1)
 df.to_csv('./edited.csv')
 
 

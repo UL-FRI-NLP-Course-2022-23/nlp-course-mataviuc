@@ -1,0 +1,15 @@
+{
+    "characters": ["countryman", "serpent"],
+    "protagonist": "countryman",
+    "antagonist": "serpent",
+    "sentiments": {
+      "countryman": {
+        "countryman": 0,
+        "serpent": -1
+      },
+      "serpent": {
+        "countryman": -1,
+        "serpent": 0
+      }
+    }
+}
