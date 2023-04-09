@@ -1,25 +1,23 @@
 import os
-from collections import Counter
-from pathlib import Path
 
-import stanza
 import numpy as np
-import spacy
-
-from coreference import replace_coreferences
 from allennlp.predictors import Predictor
 
-#from utils import read_story
+from coreference import replace_coreferences
 
-#ner_spacy = spacy.load('en_core_web_sm')
 
-def named_entity_recognition(story,story_name,method='stanza',coreference=True):
+# from utils import read_story
+
+# ner_spacy = spacy.load('en_core_web_sm')
+
+def named_entity_recognition(story, story_name, method='stanza', coreference=True):
     if coreference:
-        story=replace_coreferences(story,story_name)
+        story = replace_coreferences(story, story_name)
 
-    named_entities=[]
-    if method=='allennlp':
-        predictor = Predictor.from_path("https://storage.googleapis.com/allennlp-public-models/ner-model-2020.02.10.tar.gz")
+    named_entities = []
+    if method == 'allennlp':
+        predictor = Predictor.from_path(
+            "https://storage.googleapis.com/allennlp-public-models/ner-model-2020.02.10.tar.gz")
         results = predictor.predict(sentence=story)
 
         named_entities = []
@@ -43,12 +41,12 @@ def named_entity_recognition(story,story_name,method='stanza',coreference=True):
 
     return set(named_entities)
 
-dir_path='../data/aesop/test_story/'
-method='allennlp'
-for story_name in os.listdir(dir_path):
-    with open(dir_path+story_name, 'r') as file:
-        story = file.read().replace('\n', ' ')
-        named_entities=named_entity_recognition(story,story_name,method=method,coreference=True)
-        save_path='../results/ner/'+method+'_'+story_name.replace('txt','npy')
-        np.save(save_path,np.array(named_entities))
 
+dir_path = '../data/aesop/test_story/'
+method = 'allennlp'
+for story_name in os.listdir(dir_path):
+    with open(dir_path + story_name, 'r') as file:
+        story = file.read().replace('\n', ' ')
+        named_entities = named_entity_recognition(story, story_name, method=method, coreference=True)
+        save_path = '../results/ner/' + method + '_' + story_name.replace('txt', 'npy')
+        np.save(save_path, np.array(named_entities))
