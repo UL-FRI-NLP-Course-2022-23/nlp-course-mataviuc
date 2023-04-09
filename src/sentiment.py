@@ -62,12 +62,14 @@ def analyse_relationships(story,characters,method='vader'):
 
 
 
-dir_path='../data/aesop/test_story/'
+dir_path='../data/aesop/coreferenced/'
+method='vader'
 for story_name in os.listdir(dir_path):
     with open(dir_path+story_name, 'r') as file:
         story = file.read().replace('\n', ' ')
 
     with open('../data/aesop/annotations/'+story_name.replace('txt','json'),'r') as file:
         ground_truth=json.load(file)
-    entity_sentiment=analyse_characters(story,ground_truth['characters'],method='SVO')
-    print()
+    entity_sentiment=analyse_relationships(story,ground_truth['characters'],method=method)
+    with open('../results/sentiment/'+method+'_'+story_name.replace('txt','json'), "w") as fp:
+        json.dump(entity_sentiment, fp)

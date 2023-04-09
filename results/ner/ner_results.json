@@ -1,0 +1,1 @@
+{"precision": {"allennlp": [1.0, 1.0]}, "recall": {"allennlp": [0.75, 1.0]}, "f1": {"allennlp": [0.8571428571428571, 1.0]}, "summed": {"allennlp_precision_score": 1.0, "allennlp_recall_score": 0.875, "allennlp_f1_score": 0.9285714285714286}}
