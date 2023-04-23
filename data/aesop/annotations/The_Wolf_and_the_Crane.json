@@ -1,15 +1,20 @@
 {
-    "characters": ["wolf", "crane"],
+    "characters": [
+        "wolf",
+        "crane"
+    ],
     "protagonist": "wolf",
     "antagonist": "",
     "sentiments": {
-      "wolf": {
-        "wolf": 0,
-        "crane": 1
-      },
-      "crane": {
-        "wolf": 1,
-        "crane": 0
-      }
+        "wolf": {
+            "wolf": 0,
+            "crane": 1,
+            "overall": 1
+        },
+        "crane": {
+            "wolf": 1,
+            "crane": 0,
+            "overall": 1
+        }
     }
 }

@@ -1,15 +1,20 @@
 {
-    "characters": ["fox", "stork"],
+    "characters": [
+        "fox",
+        "stork"
+    ],
     "protagonist": "stork",
     "antagonist": "fox",
     "sentiments": {
-      "fox": {
-        "fox": 0,
-        "stork": 1
-      },
-      "stork": {
-        "fox": 1,
-        "stork": 0
-      }
+        "fox": {
+            "fox": 0,
+            "stork": 1,
+            "overall": 1
+        },
+        "stork": {
+            "fox": 1,
+            "stork": 0,
+            "overall": 1
+        }
     }
 }

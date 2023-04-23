@@ -1,15 +1,20 @@
 {
-    "characters": ["cock", "pearl"],
+    "characters": [
+        "cock",
+        "pearl"
+    ],
     "protagonist": "cock",
     "antagonist": "",
     "sentiments": {
-      "cock": {
-        "cock": 0,
-        "pearl": -1
-      },
-      "pearl": {
-        "cock": 0,
-        "pearl": 0
-      }
+        "cock": {
+            "cock": 0,
+            "pearl": -1,
+            "overall": -1
+        },
+        "pearl": {
+            "cock": 0,
+            "pearl": 0,
+            "overall": 0
+        }
     }
 }

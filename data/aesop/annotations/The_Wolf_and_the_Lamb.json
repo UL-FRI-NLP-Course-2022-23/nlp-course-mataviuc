@@ -1,15 +1,20 @@
 {
-    "characters": ["lamb", "wolf"],
+    "characters": [
+        "lamb",
+        "wolf"
+    ],
     "protagonist": "lamb",
     "antagonist": "wolf",
     "sentiments": {
-      "wolf": {
-        "wolf": 0,
-        "lamb": -1
-      },
-      "lamb": {
-        "wolf": -1,
-        "lamb": 0
-      }
+        "wolf": {
+            "wolf": 0,
+            "lamb": -1,
+            "overall": -1
+        },
+        "lamb": {
+            "wolf": -1,
+            "lamb": 0,
+            "overall": -1
+        }
     }
 }

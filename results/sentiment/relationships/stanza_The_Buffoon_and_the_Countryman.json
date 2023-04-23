@@ -1,0 +1,15 @@
+{
+    "buffoon": {},
+    "countryman": {
+        "spectators": [
+            0,
+            0
+        ]
+    },
+    "spectators": {
+        "countryman": [
+            0,
+            0
+        ]
+    }
+}

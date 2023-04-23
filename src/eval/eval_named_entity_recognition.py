@@ -57,4 +57,4 @@ for method in precisions:
 
 final = {'precision': precisions, 'recall': recalls, 'f1': f1s, 'summed': methods_dict}
 with open('../../results/ner/ner_results.json', "w") as fp:
-    json.dump(final, fp)
+    json.dump(final, fp,indent=4)

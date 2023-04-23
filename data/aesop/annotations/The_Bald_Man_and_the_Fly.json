@@ -1,15 +1,20 @@
 {
-    "characters": ["bald man", "fly"],
+    "characters": [
+        "bald man",
+        "fly"
+    ],
     "protagonist": "bald man",
     "antagonist": "fly",
     "sentiments": {
-      "bald man": {
-        "bald man": 0,
-        "fly": -1
-      },
-      "fly": {
-        "bald man": -1,
-        "fly": 0
-      }
+        "bald man": {
+            "bald man": 0,
+            "fly": -1,
+            "overall": -1
+        },
+        "fly": {
+            "bald man": -1,
+            "fly": 0,
+            "overall": -1
+        }
     }
 }

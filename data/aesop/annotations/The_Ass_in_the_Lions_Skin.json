@@ -1,15 +1,20 @@
 {
-    "characters": ["ass", "fox"],
+    "characters": [
+        "ass",
+        "fox"
+    ],
     "protagonist": "ass",
     "antagonist": "",
     "sentiments": {
-      "ass": {
-        "ass": 0,
-        "fox": 1
-      },
-      "fox": {
-        "ass": 1,
-        "fox": 0
-      }
+        "ass": {
+            "ass": 0,
+            "fox": 1,
+            "overall": 1
+        },
+        "fox": {
+            "ass": 1,
+            "fox": 0,
+            "overall": 1
+        }
     }
 }

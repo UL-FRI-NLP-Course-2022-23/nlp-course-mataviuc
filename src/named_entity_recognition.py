@@ -1,14 +1,11 @@
 import os
 
 import numpy as np
+import stanza
 from allennlp.predictors import Predictor
 
 from coreference import replace_coreferences
 
-
-# from utils import read_story
-
-# ner_spacy = spacy.load('en_core_web_sm')
 
 def named_entity_recognition(story, story_name, method='stanza', coreference=True):
     if coreference:
@@ -34,19 +31,20 @@ def named_entity_recognition(story, story_name, method='stanza', coreference=Tru
                     i += 1
                 named_entities.append(str)
             i += 1
-    # elif method=='stanza':
-    #     ner_stanza = stanza.Pipeline('en', processors='tokenize,ner')
-    #     doc = ner_stanza(story)
-    #     named_entities = [entity.text for entity in doc.ents if entity.type == 'PERSON'] #TODO SET
+    elif method=='stanza':
+        ner_stanza = stanza.Pipeline('en', processors='tokenize,ner')
+        doc = ner_stanza(story)
+        named_entities = [entity.text for entity in doc.ents if entity.type == 'PERSON']
 
     return set(named_entities)
 
 
-dir_path = '../data/aesop/test_story/'
-method = 'allennlp'
+dir_path = '../data/aesop/original/'
+method = 'stanza'
 for story_name in os.listdir(dir_path):
     with open(dir_path + story_name, 'r') as file:
         story = file.read().replace('\n', ' ')
-        named_entities = named_entity_recognition(story, story_name, method=method, coreference=True)
+        named_entities = named_entity_recognition(story, story_name, method=method, coreference=False)
         save_path = '../results/ner/' + method + '_' + story_name.replace('txt', 'npy')
         np.save(save_path, np.array(named_entities))
+        print()

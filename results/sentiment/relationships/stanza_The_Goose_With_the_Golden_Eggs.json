@@ -1,0 +1,14 @@
+{
+    "countryman": {
+        "goose": [
+            2,
+            2
+        ]
+    },
+    "goose": {
+        "countryman": [
+            2,
+            2
+        ]
+    }
+}

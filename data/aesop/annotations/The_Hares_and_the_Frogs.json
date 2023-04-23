@@ -1,22 +1,29 @@
 {
-    "characters": ["hares", "horses", "frogs"],
+    "characters": [
+        "hares",
+        "horses",
+        "frogs"
+    ],
     "protagonist": "hares",
     "antagonist": "horses",
     "sentiments": {
-      "hares": {
-        "hares": 0,
-        "horses": -1,
-        "frogs": 0
-      },
-      "horses": {
-        "hares": 0,
-        "horses": 0,
-        "frogs": 0
-      },
-      "frogs": {
-        "hares": -1,
-        "horses": 0,
-        "frogs": 0
-      }
+        "hares": {
+            "hares": 0,
+            "horses": -1,
+            "frogs": 0,
+            "overall": -1
+        },
+        "horses": {
+            "hares": 0,
+            "horses": 0,
+            "frogs": 0,
+            "overall": 0
+        },
+        "frogs": {
+            "hares": -1,
+            "horses": 0,
+            "frogs": 0,
+            "overall": -1
+        }
     }
 }

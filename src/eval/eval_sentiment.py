@@ -2,18 +2,29 @@ import json
 import os
 
 
-def basic_eval(predicted, ground_truth):
-    for character1 in predicted:
-        for character2 in predicted[character1]:
-            predicted[character1][character2] = sum(predicted[character1][character2]) / len(
-                predicted[character1][character2])
+def basic_eval(predicted, ground_truth,method):
+    if method=='vader':
+        for character1 in predicted:
+            for character2 in predicted[character1]:
+                predicted[character1][character2] = sum(predicted[character1][character2]) / len(
+                    predicted[character1][character2])
 
-            if predicted[character1][character2] > 0.7:
-                predicted[character1][character2] = 1
-            elif predicted[character1][character2] < -0.4:
-                predicted[character1][character2] = -1
-            else:
-                predicted[character1][character2] = 0
+                if predicted[character1][character2] > 0:
+                    predicted[character1][character2] = 1
+                elif predicted[character1][character2] < -0.08:
+                    predicted[character1][character2] = -1
+                else:
+                    predicted[character1][character2] = 0
+    elif method=='stanza':
+        for character1 in predicted:
+            for character2 in predicted[character1]:
+                predicted[character1][character2] = sum(predicted[character1][character2]) / len(
+                    predicted[character1][character2])
+
+                if predicted[character1][character2] > 0:
+                    predicted[character1][character2] = 1
+                elif predicted[character1][character2] ==0:
+                    predicted[character1][character2] = -1
     tp = 0
     fp = 0
     fn = 0
@@ -22,7 +33,9 @@ def basic_eval(predicted, ground_truth):
             if character1 == character2:
                 continue
 
-            if predicted[character1][character2] == ground_truth[character1][character2]:
+            if (character1 not in predicted) or (character2 not in predicted[character1]):
+                fn+=1
+            elif predicted[character1][character2] == ground_truth[character1][character2]:
                 tp += 1
             elif ground_truth[character1][character2] == 0:
                 fp += 1
@@ -39,13 +52,13 @@ def basic_eval(predicted, ground_truth):
     return precision, recall, f1
 
 
-path = '../../results/sentiment/'
+path = '../../results/sentiment/relationships'
 precisions = {}
 recalls = {}
 f1s = {}
 for sent in os.listdir(path):
 
-    with open('../../results/sentiment/' + sent, 'r') as file:
+    with open('../../results/sentiment/relationships/' + sent, 'r') as file:
         predicted = json.load(file)
 
     ground_name = sent.split('_')
@@ -59,7 +72,7 @@ for sent in os.listdir(path):
     with open('../../data/aesop/annotations/' + ground_name.replace('npy', 'json'), 'r') as file:
         ground_truth = json.load(file)
 
-    precision, recall, f1 = basic_eval(predicted, ground_truth['sentiments'])
+    precision, recall, f1 = basic_eval(predicted, ground_truth['sentiments'],method)
     precisions[method].append(precision)
     recalls[method].append(recall)
     f1s[method].append(f1)
@@ -71,5 +84,5 @@ for method in precisions:
     methods_dict[method + '_f1_score'] = sum(f1s[method]) / len(f1s[method])
 
 final = {'precision': precisions, 'recall': recalls, 'f1': f1s, 'summed': methods_dict}
-with open('../../results/sentiment/sentiment_results.json', "w") as fp:
-    json.dump(final, fp)
+with open('../../results/sentiment/relationship_sentiment_results.json', "w") as fp:
+    json.dump(final, fp,indent=4)

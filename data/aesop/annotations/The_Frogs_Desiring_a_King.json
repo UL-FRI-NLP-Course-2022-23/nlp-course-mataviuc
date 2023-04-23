@@ -1,31 +1,40 @@
 {
-    "characters": ["frogs", "jove", "log", "stork"],
+    "characters": [
+        "frogs",
+        "jove",
+        "log",
+        "stork"
+    ],
     "protagonist": "frogs",
     "antagonist": "stork",
     "sentiments": {
-      "frogs": {
-        "frogs": 0,
-        "jove": 1,
-        "log": -1,
-        "stork": -1
-      },
-      "jove": {
-        "frogs": -1,
-        "jove": 0,
-        "log": 1,
-        "stork": 0
-      },
-      "log": {
-        "frogs": 0,
-        "jove": 0,
-        "log": 0,
-        "stork": 0
-      },
-      "stork": {
-        "frogs": -1,
-        "jove": 0,
-        "log": 0,
-        "stork": 0
-      }
+        "frogs": {
+            "frogs": 0,
+            "jove": 1,
+            "log": -1,
+            "stork": -1,
+            "overall": 1
+        },
+        "jove": {
+            "frogs": -1,
+            "jove": 0,
+            "log": 1,
+            "stork": 0,
+            "overall": 1
+        },
+        "log": {
+            "frogs": 0,
+            "jove": 0,
+            "log": 0,
+            "stork": 0,
+            "overall": 0
+        },
+        "stork": {
+            "frogs": -1,
+            "jove": 0,
+            "log": 0,
+            "stork": 0,
+            "overall": -1
+        }
     }
 }

@@ -1,15 +1,20 @@
 {
-    "characters": ["waggoner", "hercules"],
+    "characters": [
+        "waggoner",
+        "hercules"
+    ],
     "protagonist": "waggoner",
     "antagonist": "",
     "sentiments": {
-      "waggoner": {
-        "waggoner": 0,
-        "hercules": 1
-      },
-      "hercules": {
-        "waggoner": 1,
-        "hercules": 0
-      }
+        "waggoner": {
+            "waggoner": 0,
+            "hercules": 1,
+            "overall": 1
+        },
+        "hercules": {
+            "waggoner": 1,
+            "hercules": 0,
+            "overall": 1
+        }
     }
 }

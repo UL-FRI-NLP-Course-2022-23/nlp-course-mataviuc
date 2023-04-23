@@ -1,0 +1,33 @@
+{
+    "hart": {
+        "hunters": [
+            1,
+            1
+        ],
+        "stable boys": [
+            1,
+            1
+        ]
+    },
+    "hunters": {
+        "hart": [
+            1,
+            1
+        ],
+        "stable boys": [
+            0,
+            0
+        ]
+    },
+    "stable boys": {
+        "hart": [
+            1,
+            1
+        ],
+        "hunters": [
+            0,
+            0
+        ]
+    },
+    "master": {}
+}

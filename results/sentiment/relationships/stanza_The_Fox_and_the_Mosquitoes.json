@@ -1,0 +1,32 @@
+{
+    "fox": {
+        "mosquitoes": [
+            0,
+            0
+        ],
+        "hedgehog": [
+            0,
+            0
+        ]
+    },
+    "mosquitoes": {
+        "fox": [
+            0,
+            0
+        ],
+        "hedgehog": [
+            0,
+            0
+        ]
+    },
+    "hedgehog": {
+        "fox": [
+            0,
+            0
+        ],
+        "mosquitoes": [
+            0,
+            0
+        ]
+    }
+}

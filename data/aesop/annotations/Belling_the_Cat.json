@@ -1,31 +1,40 @@
 {
-    "characters": ["mice", "cat", "young mouse", "old mouse"],
+    "characters": [
+        "mice",
+        "cat",
+        "young mouse",
+        "old mouse"
+    ],
     "protagonist": "mice",
     "antagonist": "cat",
     "sentiments": {
-      "mice": {
-        "mice": 0,
-        "young mouse": 1,
-        "old mouse": 1,
-        "cat": -1
-      },
-      "cat": {
-        "mice": -1,
-        "young mouse": -1,
-        "old mouse": -1,
-        "cat": 0
-      },
-      "young mouse": {
-        "mice": 1,
-        "young mouse": 0,
-        "old mouse": 1,
-        "cat": -1
-      },
-      "old mouse": {
-        "mice": 1,
-        "young mouse": 1,
-        "old mouse": 0,
-        "cat": -1
-      }
+        "mice": {
+            "mice": 0,
+            "young mouse": 1,
+            "old mouse": 1,
+            "cat": -1,
+            "overall": 1
+        },
+        "cat": {
+            "mice": -1,
+            "young mouse": -1,
+            "old mouse": -1,
+            "cat": 0,
+            "overall": -1
+        },
+        "young mouse": {
+            "mice": 1,
+            "young mouse": 0,
+            "old mouse": 1,
+            "cat": -1,
+            "overall": 1
+        },
+        "old mouse": {
+            "mice": 1,
+            "young mouse": 1,
+            "old mouse": 0,
+            "cat": -1,
+            "overall": 1
+        }
     }
 }

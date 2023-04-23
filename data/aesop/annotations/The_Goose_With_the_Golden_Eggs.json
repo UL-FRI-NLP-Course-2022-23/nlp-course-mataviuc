@@ -1,15 +1,20 @@
 {
-    "characters": ["countryman", "goose"],
+    "characters": [
+        "countryman",
+        "goose"
+    ],
     "protagonist": "countryman",
     "antagonist": "",
     "sentiments": {
-      "countryman": {
-        "countryman": 0,
-        "goose": 1
-      },
-      "goose": {
-        "countryman": 0,
-        "goose": 0
-      }
+        "countryman": {
+            "countryman": 0,
+            "goose": 1,
+            "overall": 1
+        },
+        "goose": {
+            "countryman": 0,
+            "goose": 0,
+            "overall": 0
+        }
     }
 }

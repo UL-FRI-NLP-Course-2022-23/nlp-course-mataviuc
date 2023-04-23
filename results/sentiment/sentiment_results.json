@@ -1,1 +1,0 @@
-{"precision": {"vader": [0.5, 1.0]}, "recall": {"vader": [0.7142857142857143, 0.8333333333333334]}, "f1": {"vader": [0.588235294117647, 0.9090909090909091]}, "summed": {"vader_precision_score": 0.75, "vader_recall_score": 0.7738095238095238, "vader_f1_score": 0.748663101604278}}

@@ -1,22 +1,29 @@
 {
-    "characters": ["lion", "fox", "ass"],
+    "characters": [
+        "lion",
+        "fox",
+        "ass"
+    ],
     "protagonist": "lion",
     "antagonist": "ass",
     "sentiments": {
-      "lion": {
-        "lion": 0,
-        "fox": 1,
-        "ass": -1
-      },
-      "fox": {
-        "lion": 1,
-        "fox": 0,
-        "ass": -1
-      },
-      "ass": {
-        "lion": 1,
-        "fox": 1,
-        "ass": 0
-      }
+        "lion": {
+            "lion": 0,
+            "fox": 1,
+            "ass": -1,
+            "overall": 1
+        },
+        "fox": {
+            "lion": 1,
+            "fox": 0,
+            "ass": -1,
+            "overall": 1
+        },
+        "ass": {
+            "lion": 1,
+            "fox": 1,
+            "ass": 0,
+            "overall": 1
+        }
     }
 }

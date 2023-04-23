@@ -1,15 +1,20 @@
 {
-    "characters": ["grasshopper", "ant"],
+    "characters": [
+        "grasshopper",
+        "ant"
+    ],
     "protagonist": "grasshopper",
     "antagonist": "",
     "sentiments": {
-      "grasshopper": {
-        "grasshopper": 0,
-        "ant": 1
-      },
-      "ant": {
-        "grasshopper": 1,
-        "ant": 0
-      }
+        "grasshopper": {
+            "grasshopper": 0,
+            "ant": 1,
+            "overall": 1
+        },
+        "ant": {
+            "grasshopper": 1,
+            "ant": 0,
+            "overall": 1
+        }
     }
 }
