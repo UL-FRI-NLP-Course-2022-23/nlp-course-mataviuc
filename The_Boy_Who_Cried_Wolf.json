@@ -1,0 +1,22 @@
+{
+"characters": [
+"shepherd boy",
+"villagers",
+"wolf"
+],
+"protagonist": "villagers",
+"antagonist": "shepherd boy",
+"sentiments": {
+"shepherd boy": {
+"villagers": -1,
+"wolf": -1
+},
+"villagers": {
+"shepherd boy": -1,
+"wolf": 0
+},
+"wolf": {
+"shepherd boy": 1
+}
+}
+}
