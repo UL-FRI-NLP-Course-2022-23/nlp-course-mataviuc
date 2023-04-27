@@ -3,5 +3,5 @@ venv
 .ipynb_checkpoints
 __pycache__/
 ./data/aesop/test_story
-
+*.pt
 data/aesop/test_story

@@ -22,12 +22,8 @@ if torch.cuda.is_available():
     for i in range(torch.cuda.device_count()):
         print(f"Found GPU device: {torch.cuda.get_device_name(i)}")
 
-df_data = pd.read_csv("../ner_dataset.csv", encoding="latin1").fillna(method="ffill")
-df_data['Tag'][df_data.Tag=='B-per']='PER'
-df_data['Tag'][df_data.Tag=='I-per']='PER'
-df_data['Tag'][df_data.Tag!='PER']='O'
+df_data = pd.read_csv("../data/bert.csv", encoding="latin1").fillna(method="ffill")
 
-df_data['POS'] = '0'
 
 tag_list = df_data.Tag.unique()
 tag_list = np.append(tag_list, "PAD")
@@ -139,10 +135,11 @@ test_dataloader = DataLoader(test_data, sampler=test_sampler, batch_size=BATCH_S
 
 
 model = BertForTokenClassification.from_pretrained(
-    "bert-base-cased",
+    "./bert",
     num_labels=len(label2code),
     output_attentions = False,
-    output_hidden_states = False
+    output_hidden_states = False,
+    local_files_only=True
 )
 
 
@@ -181,7 +178,7 @@ print(f"The classifier-only model has {params_classifier} trainable parameters")
 
 from transformers import get_linear_schedule_with_warmup
 
-epochs = 2
+epochs = 8
 max_grad_norm = 1.0
 
 # Total number of training steps is number of batches * number of epochs.
@@ -296,9 +293,8 @@ for epoch_id in range(epochs):
                                    for l in true_labels]
     print("Validation F1-Score: {}".format(f1_score(pred_tags, valid_tags)))
     print()
-model.save_pretrained('./bert')
-torch.save(model, 'ner_bert_pt_.pt')
-model = torch.load('ner_bert_pt_.pt', map_location=torch.device('cpu'))
+torch.save(model, 'ner_bert_pt_finetuned.pt')
+model = torch.load('ner_bert_pt_finetuned.pt', map_location=torch.device('cpu'))
 # Uncommend inline and show to show within the jupyter only.
 import matplotlib.pyplot as plt
 
