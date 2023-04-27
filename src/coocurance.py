@@ -1,6 +1,5 @@
 import json
 import os
-
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
@@ -28,14 +27,18 @@ def draw_graph(story, characters, story_name, plot=True):
     if plot:
         row_sums = df.sum(axis=1) > 0
         selected = df[row_sums].loc[:, row_sums]
+
         plt.clf()
+        ax = plt.subplot(111)
+        ax.margins(0.3)
+
         l = {i: n for i, n in enumerate(selected.columns)}
         G = nx.from_numpy_matrix(np.matrix(selected))
         edges = G.edges()
         weights = [G[u][v]['weight'] for u, v in edges]
-        nx.draw(G, labels=l, with_labels=True, width=weights, font_size=18, edge_color='lightblue')
+        nx.draw(G, ax=ax,labels=l, with_labels=True, width=weights, font_size=18, edge_color='lightblue')
 
-        plt.title(story_name.replace('.txt', ''))
+        ax.set_title(story_name.replace('.txt', '').replace('_',' '))
         plt.savefig("../results/figs/" + story_name.replace('txt', 'png'))
         plt.show()
 
