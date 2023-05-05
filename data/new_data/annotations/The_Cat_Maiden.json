@@ -1,0 +1,40 @@
+{
+    "characters": [
+        "jupiter",
+        "venus",
+        "cat",
+        "maiden"
+    ],
+    "protagonist": "",
+    "antagonist": "",
+    "sentiments": {
+        "jupiter": {
+            "jupiter": 0,
+            "venus": -1,
+            "cat": 0,
+            "maiden": 0,
+            "overall": -1
+        },
+        "venus": {
+            "jupiter": -1,
+            "venus": 0,
+            "cat": 0,
+            "maiden": 0,
+            "overall": -1
+        },
+        "cat": {
+            "jupiter": 0,
+            "venus": 0,
+            "cat": 0,
+            "maiden": 0,
+            "overall": 0
+        },
+        "maiden": {
+            "jupiter": 0,
+            "venus": 0,
+            "cat": 0,
+            "maiden": 0,
+            "overall": 0
+        }
+    }
+}
