@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from tqdm import tqdm, trange
-
+import os
 import torch
 from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
 from transformers import BertTokenizer, BertConfig
@@ -22,18 +22,20 @@ if torch.cuda.is_available():
     for i in range(torch.cuda.device_count()):
         print(f"Found GPU device: {torch.cuda.get_device_name(i)}")
 
-df_data = pd.read_csv("../data/bert.csv", encoding="latin1").fillna(method="ffill")
+test_data = pd.read_csv("../data/bert.csv", encoding="latin1").fillna(method="ffill")
+train_data = pd.read_csv("../data/bert_train.csv", encoding="latin1").fillna(method="ffill")
 
 
-tag_list = df_data.Tag.unique()
+tag_list = train_data.Tag.unique()
 tag_list = np.append(tag_list, "PAD")
 print(f"Tags: {', '.join(map(str, tag_list))}")
 
 
 
-x_train, x_test = train_test_split(df_data, test_size=0.20, shuffle=False, random_state = 42)
-x_val, x_test = train_test_split(x_test, test_size=0.50, shuffle=False, random_state = 42)
-
+x_train = train_data
+# x_test,x_val = train_test_split(test_data, test_size=0.80, shuffle=False, random_state = 42)
+x_val= test_data
+x_test = test_data
 agg_func = lambda s: [ [w,t] for w,t in zip(s["Word"].values.tolist(),s["Tag"].values.tolist())]
 
 
@@ -61,7 +63,7 @@ num_labels = len(label2code)
 
 
 MAX_LENGTH = 128
-BATCH_SIZE = 96
+BATCH_SIZE = 32
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 n_gpu = torch.cuda.device_count()
@@ -163,7 +165,7 @@ else:
 
 optimizer = AdamW(
     optimizer_grouped_parameters,
-    lr=3e-5,
+    lr=5e-5,
     eps=1e-8
 )
 
@@ -178,7 +180,7 @@ print(f"The classifier-only model has {params_classifier} trainable parameters")
 
 from transformers import get_linear_schedule_with_warmup
 
-epochs = 8
+epochs = 17
 max_grad_norm = 1.0
 
 # Total number of training steps is number of batches * number of epochs.
@@ -187,7 +189,7 @@ total_steps = len(train_dataloader) * epochs
 # Create the learning rate scheduler.
 scheduler = get_linear_schedule_with_warmup(
     optimizer,
-    num_warmup_steps=0,
+    num_warmup_steps=5,
     num_training_steps=total_steps
 )
 
@@ -273,7 +275,7 @@ for epoch_id in range(epochs):
         # Move logits and labels to CPU
         logits = outputs[1].detach().cpu().numpy()
         label_ids = b_labels.to('cpu').numpy()
-
+        print(label_ids)
         # Calculate the accuracy for this batch of test sentences.
         eval_loss += outputs[0].mean().item()
         eval_accuracy += flat_accuracy(logits, label_ids)
@@ -293,8 +295,8 @@ for epoch_id in range(epochs):
                                    for l in true_labels]
     print("Validation F1-Score: {}".format(f1_score(pred_tags, valid_tags)))
     print()
-torch.save(model, 'ner_bert_pt_finetuned.pt')
-model = torch.load('ner_bert_pt_finetuned.pt', map_location=torch.device('cpu'))
+torch.save(model, 'ner_bert_pt_finetuned123456.pt')
+model = torch.load('ner_bert_pt_finetuned123456.pt', map_location=torch.device('cpu'))
 # Uncommend inline and show to show within the jupyter only.
 import matplotlib.pyplot as plt
 
@@ -326,9 +328,59 @@ results_true = [[code2label[l_i] for l_i in l if code2label[l_i] != "PAD"]
                 for l in true_labels]
 
 
-
+print(results_predicted)
+print(results_true)
 print(f"F1 score: {f1_score(results_true, results_predicted)}")
 print(f"Accuracy score: {accuracy_score(results_true, results_predicted)}")
 print(classification_report(results_true, results_predicted))
 
 
+def named_entity_recognition(story, story_name, method='stanza', coreference=True):
+
+
+    named_entities = []
+    if method == 'bert':
+        tokenized_sentence = tokenizer.encode(story)
+        input_ids = torch.tensor([tokenized_sentence]).to(device)
+        with torch.no_grad():
+            output = model(input_ids.to(model.device))
+        label_indices = np.argmax(output[0].to('cpu').numpy(), axis=2)
+        tokens = tokenizer.convert_ids_to_tokens(input_ids.to('cpu').numpy()[0])
+        new_tokens, new_labels = [], []
+        for token, label_idx in zip(tokens, label_indices[0]):
+            if token.startswith("##"):
+                new_tokens[-1] = new_tokens[-1] + token[2:]
+            else:
+                new_labels.append(code2label[label_idx])
+                new_tokens.append(token)
+        named_entities = []
+        for token, label in zip(new_tokens, new_labels):
+
+            i = 0
+            while i < len(new_tokens):
+                if new_labels[i] in ['U-PER' ]:
+                    named_entities.append([i])
+                elif new_labels[i] in ['B-per']:
+                    str = new_tokens[i]
+                    i += 1
+                    while i < len(new_tokens) and new_labels[i] in ['B-per']:
+                        str += ' '
+                        str += new_tokens[i]
+                        i += 1
+                    named_entities.append(str)
+                i += 1
+
+
+    return set(named_entities)
+
+
+dir_path = '../data/aesop/original/'
+method = 'bert'
+for story_name in os.listdir(dir_path):
+    with open(dir_path + story_name, 'r') as file:
+        story = file.read().replace('\n', ' ')
+        named_entities = named_entity_recognition(story, story_name, method=method, coreference=False)
+        print(named_entities)
+        save_path = '../results/ner/' + method + '_' + story_name.replace('txt', 'npy')
+        np.save(save_path, np.array(named_entities))
+        print()

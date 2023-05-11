@@ -10,6 +10,7 @@ method = 'bert'
 for story_name in os.listdir(dir_path_story):
     with open(dir_path_story + story_name, 'r') as file:
         story = file.read().replace('\n', ' ')
+    print(story_name)
     with open(dir_path_annots+ story_name.replace('txt','json')) as file:
         ground_truth = json.load(file)
     import pandas as pd
@@ -23,9 +24,8 @@ for story_name in os.listdir(dir_path_story):
             tag = 'O'
             for char in ground_truth['characters']:
                 for sub_name in char.split(" "):
-
-                    if word.lower() == sub_name and nltk.pos_tag([sub_name])[0][1] not in ['JJ', 'JJS', 'JJR']:
-                        tag = 'PER'
+                    if word.lower() == sub_name.lower() and nltk.pos_tag([sub_name])[0][1] not in ['JJ', 'JJS', 'JJR']:
+                        tag = 'B-per'
             if jj == 0:
                 df = pd.concat([df, pd.DataFrame(
                     [{'Sentence #': 'Sentence: ' + str(ii + 1), 'Word': word, 'POS': '0', 'Tag': tag}])],

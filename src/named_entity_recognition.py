@@ -8,13 +8,13 @@ from allennlp.predictors import Predictor
 from transformers import BertTokenizer
 from coreference import replace_coreferences
 
-df_data = pd.read_csv("../ner_dataset.csv", encoding="latin1").fillna(method="ffill")
+df_data = pd.read_csv("../data/bert.csv", encoding="latin1").fillna(method="ffill")
 tag_list = df_data.Tag.unique()
 tag_list = np.append(tag_list, "PAD")
 label2code = {label: i for i, label in enumerate(tag_list)}
 code2label = {v: k for k, v in label2code.items()}
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = torch.load('ner_bert_pt_.pt').to(device)
+model = torch.load('ner_bert_pt_finetuned12.pt').to(device)
 model.eval()
 tokenizer = BertTokenizer.from_pretrained('bert-base-cased', do_lower_case=False)
 
