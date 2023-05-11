@@ -4,4 +4,7 @@ venv
 __pycache__/
 ./data/aesop/test_story
 *.pt
+*.bin
 data/aesop/test_story
+ner.csv
+ner_dataset.csv
