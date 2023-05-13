@@ -16,4 +16,4 @@ Literature is a diverse field with unique characters and relationships that inte
 ## Project structure
 * Folder [data](data/) contains our short stories corpus. We used two corpora. The first corpus consists of 44 short stories. The data was taken from a project of a group from last year. They annotated 55 stories. We decided to enlarge the corpus so we added 73 additional stories, but annotated only the characters, not the sentiment as well.
 * [Notebook](corpus_analysis.ipynb) contains basic corpus analysis.
-* Folder [src](src/) contains main code.
+* Folder [src](src/) contains main code. Scripts can be run using the basic python command.
