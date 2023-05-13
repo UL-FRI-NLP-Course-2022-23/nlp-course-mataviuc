@@ -11,14 +11,9 @@ ____________________________________
 ## Description
 This is repository for course NLP. We have chosen the first project, namely literacy situation models knowledge base creation.
 
-Literature is a rich and diverse field that contains a vast set of characters and relationships. From novels and short stories to plays and poems, literature offers an endless variety of human experiences, emotions, and perspectives. We established and implemented a method for database enrichment, meaning extracting NER, adding relationships, and sentiment character analysis (protagonists, antagonists).
+Literature is a diverse field with unique characters and relationships that interact in complex ways. NLP may struggle to understand these elements due to the ambiguity and unclear references in natural language. In this assignment, we focus on short story NLP analysis. We build our corpus from Gutenberg short stories. On the collected corpus, we apply coreference resolution and then test several methods. First, we test AllanNLP and Stanza models for named entity recognition (NER). We implement and test out own BERT model for NER. An important aspect of literature is also single-character and character-to-character sentiment. We test Stanza and Vader models. Based on the captured information we build and analyse the co-occurrence graph and report the accuracy of each tested method.
 
 ## Project structure
-* Folder [data](data/) contains our fairy tale corpus.
+* Folder [data](data/) contains our short stories corpus. We used two corpora. The first corpus consists of 44 short stories. The data was taken from a project of a group from last year. They annotated 55 stories. We decided to enlarge the corpus so we added 73 additional stories, but annotated only the characters, not the sentiment as well.
 * [Notebook](corpus_analysis.ipynb) contains basic corpus analysis.
-
-## Run
-* install requirements
-```
-pip install -r ./requirements.txt
-```
+* Folder [src](src/) contains main code.
