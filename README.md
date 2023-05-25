@@ -1,4 +1,4 @@
-# Natural language processing course 2022/23: `Literacy situation models knowledge base creation`
+# Natural language processing course 2022/23: `Constructing a Co-Occurrence Graph from a Short Story Database: A Pipeline Approach`
 
 Team members:
  * `Jer Pelhan`, `63170223`, `jp4861@student.uni-lj.si`
