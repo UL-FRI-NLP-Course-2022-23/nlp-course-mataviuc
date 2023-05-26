@@ -1,8 +1,8 @@
 # Natural language processing course 2022/23: `Constructing a Co-Occurrence Graph from a Short Story Database: A Pipeline Approach`
 
 Team members:
- * `Jer Pelhan`, `63170223`, `jp4861@student.uni-lj.si`
- * `Nina Velikajne`, `63170299`, `nv6920@student.uni-lj.si`
+ * `Jer Pelhan`, `jp4861@student.uni-lj.si`
+ * `Nina Velikajne`, `nv6920@student.uni-lj.si`
 
 Group public acronym/name: `Mataviuc`
  > This value will be used for publishing marks/scores. It will be known only to you and not you colleagues.
